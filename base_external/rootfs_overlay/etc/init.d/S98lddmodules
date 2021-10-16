@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+	start)
+		scull_load
+		module_load faulty
+		modprobe hello
+		;;
+	stop)
+		scull_unload
+		module_unload faulty
+		rmmod hello
+		;;
+	*)
+		printf "Usage: %s {start|stop}" $0
+		exit 1
+esac
+
+exit 0
