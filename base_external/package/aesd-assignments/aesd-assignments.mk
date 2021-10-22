@@ -18,16 +18,16 @@ AESD_ASSIGNMENTS_MODULE_MAKE_OPTS = KVERSION=$(LINUX_VERSION_PROBED)
 
 define AESD_ASSIGNMENTS_BUILD_CMDS
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/server clean
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/server all
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/server aesdsocket-chrdev
 endef
 
 define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
-	$(INSTALL) -m 0755 $(@D)/server/aesdsocket $(TARGET_DIR)/usr/bin/
+	$(INSTALL) -m 0755 $(@D)/server/aesdsocket-chrdev $(TARGET_DIR)/usr/bin/aesdsocket
 	$(INSTALL) -m 0755 -t $(TARGET_DIR)/etc/init.d/ $(@D)/server/S99aesdsocket \
 		$(@D)/aesd-char-driver/S98aesdchar
 	$(INSTALL) -m 0700 -t $(TARGET_DIR)/usr/bin $(@D)/aesd-char-driver/aesdchar_load \
 		$(@D)/aesd-char-driver/aesdchar_unload
-	$(INSTALL) -m 0755 $(@D)/assignment-autotest/test/assignment8/drivertest.sh $(TARGET_DIR)/usr/bin/test_aesdchar
+	$(INSTALL) -m 0755 -d -t $(TARGET_DIR)/usr/bin/ $(@D)/assignment-autotest/test/assignment8
 endef
 
 $(eval $(kernel-module))
