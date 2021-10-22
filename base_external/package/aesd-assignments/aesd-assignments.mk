@@ -27,7 +27,7 @@ define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
 		$(@D)/aesd-char-driver/S98aesdchar
 	$(INSTALL) -m 0700 -t $(TARGET_DIR)/usr/bin $(@D)/aesd-char-driver/aesdchar_load \
 		$(@D)/aesd-char-driver/aesdchar_unload
-	$(INSTALL) -m 0755  $(@D)/assignment-autotest/test/assignment8/drivertest.sh $(TARGET_DIR)/usr/bin/drivertest
+	$(INSTALL) -m 0755  $(@D)/assignment-autotest/test/assignment8/drivertest.sh $(TARGET_DIR)/usr/bin/drivertest.sh
 endef
 
 $(eval $(kernel-module))
